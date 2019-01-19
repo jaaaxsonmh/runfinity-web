@@ -34,10 +34,7 @@ export class Home extends Component {
       <div>
         <Navbar color="white" light expand="md">
           <NavbarBrand href="/">
-            <div class="row">
-              <img src={Logo} height="30" />
-              <p>Runfinity</p>
-            </div>
+            <img src={Logo} height="35" />
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
