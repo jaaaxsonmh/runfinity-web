@@ -1,0 +1,92 @@
+body,
+html {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  color: orange;
+}
+
+.bg-img {
+  /* The image used */
+  background-image: url(https://hips.hearstapps.com/netdoctor.cdnds.net/17/20/4000x2000/landscape-1495031594-two-women-running-along-road.jpg);
+
+  /* Control the height of the image */
+  min-height: 720px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+/* add styles to the navitems */
+
+.navbar-custom {
+  color: orange;
+}
+
+/* Add styles to the form titles */
+
+.text-color {
+  color: orange;
+}
+
+/* Add styles to the form container */
+.container-small {
+  position: absolute;
+  right: 1;
+  margin: 120px;
+  max-width: 350px;
+  padding: 12px;
+  top: 8px;
+  right: 16px;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.card-title {
+  color: white;
+  background-color: orange;
+}
+
+.orange-text {
+  color: orange;
+}
+
+/* Full-width input fields */
+input[type="text"],
+input[type="email"] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit button */
+.btn .btn-outline- {
+  background-color: orange;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
