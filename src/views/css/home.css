@@ -9,7 +9,7 @@ html {
 
 .bg-img {
   /* The image used */
-  background-image: url(https://hips.hearstapps.com/netdoctor.cdnds.net/17/20/4000x2000/landscape-1495031594-two-women-running-along-road.jpg);
+  background-image: url(https://znaj.ua/images/2018/08/31/8rTPyRqqMZbaUs2xWVpwfjtowBOLCrjfayHYKorV.jpeg);
 
   /* Control the height of the image */
   min-height: 720px;
@@ -23,8 +23,39 @@ html {
 
 /* Add styles to the form titles */
 
-.text-color {
+.text-color-white {
+  color: white;
+}
+
+.text-color-orange {
   color: orange;
+}
+
+/* add style to the title / para text on home */
+
+.motivation {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 25px;
+  border: none;
+  font: normal 40px "Fredoka One", Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  text-shadow: 3px 3px 0 orange, 4px 4px 0 orange, 5px 5px 0 orange,
+    6px 6px 0 orange, 7px 7px 0 orange, 8px 8px 0 orange, 9px 9px 0 orange,
+    10px 10px 0 orange, 11px 11px 0 orange, 12px 12px 0 orange,
+    13px 13px 0 orange, 14px 14px 0 orange, 15px 15px 0 orange,
+    16px 16px 0 orange, 17px 17px 0 orange, 18px 18px 0 orange,
+    19px 19px 0 orange, 20px 20px 0 orange;
+}
+
+.motivation-detail {
+  color: white;
+  font-size: 24px;
 }
 
 /* Add styles to the form container */
@@ -36,6 +67,13 @@ html {
   padding: 12px;
   top: 8px;
   right: 16px;
+}
+
+.information {
+  position: absolute;
+  margin-top: 120px;
+  margin-left: 110px;
+  left: 10px;
 }
 
 .card {
@@ -56,7 +94,7 @@ input[type="text"],
 input[type="email"] {
   width: 100%;
   padding: 15px;
-  margin: 5px 0 22px 0;
+  margin: 5px 0 10px 0;
   border: none;
   background: #f1f1f1;
 }
@@ -67,17 +105,60 @@ input[type="email"]:focus {
   outline: none;
 }
 
-/* Set a style for the submit button */
-.btn .btn-outline- {
-  background-color: orange;
-  color: white;
-  padding: 16px 20px;
-  border: none;
+/* add style for the submit button */
+
+.submit-btn {
+  display: inline-block;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  position: relative;
   cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
+  top: 0;
+  border: 2px solid orange;
+  font: normal normal bold 16px/30px Arial, Helvetica, sans-serif;
+  color: orange;
+  text-align: center;
+  text-transform: uppercase;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: white;
 }
 
-.btn:hover {
-  opacity: 1;
+.submit-btn:active {
+  color: white;
+  background: orange;
+}
+
+/* padding */
+
+.padding {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+/* second section card styles */
+div.polaroid {
+  width: 450px;
+  text-align: center;
+  margin-left: 150px;
+  margin-block-end: 25px;
+  margin-block-start: 25px;
+}
+
+div.container {
+  padding: 10px;
+}
+
+.card-header-image {
+  width: 100%;
+}
+
+.card-body-orange {
+  padding-top: 12px;
+  padding-block-end: 1px;
+  background-color: orange;
+  color: white;
+  font-weight: 600;
+  font-size: 24px;
 }
