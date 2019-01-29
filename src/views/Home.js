@@ -246,7 +246,7 @@ export class Home extends Component {
                 </div>
               </div>
             </div>
-            <div class="footer-copyright  py-3 orange-text">
+            <div class="footer-copyright py-3 orange-text">
               © 2019 Copyright:{" "}
               <a class="black-link" href="http://www.runfinity.co.nz/">
                 Runfinity.co.nz
