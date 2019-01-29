@@ -162,3 +162,23 @@ div.container {
   font-weight: 600;
   font-size: 24px;
 }
+
+.black-link {
+  color: rgb(210, 209, 209);
+}
+
+.black-link:hover {
+  color: orange;
+}
+
+.footer {
+  background-color: rgb(73, 73, 73);
+}
+
+.footer-copyright {
+  background-color: black;
+}
+
+.black-text {
+  color: rgb(210, 209, 209);
+}
