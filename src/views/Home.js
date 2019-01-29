@@ -37,7 +37,7 @@ export class Home extends Component {
       <div>
         <Navbar color="white" light expand="md">
           <NavbarBrand href="/">
-            <img src={Logo} height="35" />
+            <img src={Logo} height="35" alt="Runfinity" />
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -104,6 +104,7 @@ export class Home extends Component {
                             id="materialSubscriptionFormPasswords"
                             class="form-control"
                             placeholder="Name"
+                            required
                           />
                         </div>
 
@@ -113,6 +114,7 @@ export class Home extends Component {
                             id="materialSubscriptionFormEmail"
                             class="form-control"
                             placeholder="Email"
+                            required
                           />
                           <small
                             id="emailHelp"
@@ -122,7 +124,7 @@ export class Home extends Component {
                           </small>
                         </div>
 
-                        <button class="submit-btn" type="button">
+                        <button class="submit-btn" type="submit">
                           Let's get that bread
                         </button>
 
@@ -141,7 +143,7 @@ export class Home extends Component {
         </section>
 
         <section>
-          <div class="row">
+          <div class="row no-gutters">
             <div class="polaroid">
               <img
                 class="card-header-image"
