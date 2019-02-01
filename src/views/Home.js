@@ -7,6 +7,8 @@ import { RunfinityFooter } from "./Footer.js";
 import { RunfinityNavbar } from "./Navbar.js";
 import "./css/home.css";
 
+import { Testimonials } from "./Testimonals";
+
 export class Home extends Component {
   render() {
     return (
@@ -122,6 +124,7 @@ export class Home extends Component {
             </div>
           </div>
         </section>
+        <Testimonials />
         <div>
           <RunfinityFooter />
         </div>
