@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import "./css/home.css";
-import Logo from "./images/logo.png";
+import Logo from "../images/logo.png";
 import {
   Collapse,
   Navbar,
@@ -39,7 +38,7 @@ export class RunfinityNavbar extends Component {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="navbar-custom ml-auto" navbar>
             <NavItem>
-              <NavLink href="/components/">Home</NavLink>
+              <NavLink href="/">Home</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/components/">Premium</NavLink>

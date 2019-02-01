@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./css/home.css";
 
 export class RunfinityFooter extends Component {
   render() {
@@ -64,7 +63,7 @@ export class RunfinityFooter extends Component {
                   </a>
                 </li>
                 <li>
-                  <a class="black-link" href="#!">
+                  <a class="black-link" href="/legal">
                     Legal
                   </a>
                 </li>

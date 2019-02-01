@@ -1,0 +1,12 @@
+body,
+html {
+  height: 100%;
+}
+
+.legal-bg {
+  background-image: url(http://i.imgur.com/S1OsrYY.jpg);
+}
+
+h1 {
+  color: red;
+}

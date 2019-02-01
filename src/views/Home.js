@@ -3,12 +3,12 @@ import React, { Component } from "react";
 import tiers from "./images/track_tiers.jpg";
 import data from "./images/track_data.jpg";
 import run from "./images/track_run.jpg";
-import { RunfinityFooter } from "./Footer.js";
-import { RunfinityNavbar } from "./Navbar.js";
+import { RunfinityFooter } from "./components/Footer.js";
+import { RunfinityNavbar } from "./components/Navbar.js";
 import "./css/home.css";
 
-import { Testimonials } from "./Testimonals";
-import { RotatingText } from "./Rotating-text";
+import { Testimonials } from "./components/Testimonals";
+import { RotatingText } from "./components/Rotating-text";
 import "./css/rotating-text.css";
 
 export class Home extends Component {

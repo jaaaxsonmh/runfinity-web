@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-import "./css/rotating-text.css";
-
 export class RotatingText extends Component {
   render() {
     return (
