@@ -1,67 +1,17 @@
 import React, { Component } from "react";
-import Logo from "./images/logo.png";
+
 import tiers from "./images/track_tiers.jpg";
 import data from "./images/track_data.jpg";
 import run from "./images/track_run.jpg";
+import { RunfinityFooter } from "./Footer.js";
+import { RunfinityNavbar } from "./Navbar.js";
 import "./css/home.css";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink
-} from "reactstrap";
 
 export class Home extends Component {
-  state = {};
-
-  constructor(props) {
-    super(props);
-
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true
-    };
-  }
-
-  toggleNavbar() {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  }
-
   render() {
     return (
       <div>
-        <Navbar color="white" light expand="md">
-          <NavbarBrand href="/">
-            <img src={Logo} height="35" alt="Runfinity" />
-          </NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="navbar-custom ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/components/">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/components/">Premium</NavLink>
-              </NavItem>
-              <NavItem background-color="red">
-                <NavLink href="/components/">Training</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://www.github.com/jaaaxsonmh/runfinity-web">
-                  GitHub
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/components/">Log in</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
+        <RunfinityNavbar />
         <section>
           <div class="bg-img">
             <section>
@@ -173,86 +123,7 @@ export class Home extends Component {
           </div>
         </section>
         <div>
-          <footer className="footer">
-            <div class="container-fluid text-center text-md-left">
-              <div class="row">
-                <div class="col-md-6 ">
-                  <h5 class="text-uppercase orange-text padding">
-                    Runfinity.co.nz
-                  </h5>
-                  <p class="black-text">
-                    This was a Research and Development project for the final
-                    year in our Bachelor of Computer and Information Sciences
-                    (Software Engineering) at Auckland University of Technology
-                    we learnt a lot about how mobile phones interact and can
-                    communicate clearly across API's and other data streams
-                    overall we are happy with our progress in multiple areas of
-                    development and the research that went on behind the scenes
-                    and lead to the creation of Runfinity.
-                  </p>
-                </div>
-
-                <div class="col-md-3">
-                  <h5 class="text-uppercase orange-text padding">Home</h5>
-
-                  <ul class="list-unstyled">
-                    <li>
-                      <a class="black-link" href="#!">
-                        Premium
-                      </a>
-                    </li>
-                    <li>
-                      <a class="black-link" href="#!">
-                        Training
-                      </a>
-                    </li>
-                    <li>
-                      <a class="black-link" href="#!">
-                        Github
-                      </a>
-                    </li>
-                    <li>
-                      <a class="black-link" href="#!">
-                        Log in
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="col-md-3">
-                  <h5 class="text-uppercase orange-text padding">about</h5>
-
-                  <ul class="list-unstyled">
-                    <li>
-                      <a class="black-link" href="#!">
-                        Terms & Conditions
-                      </a>
-                    </li>
-                    <li>
-                      <a class="black-link" href="#!">
-                        Privacy Policy
-                      </a>
-                    </li>
-                    <li>
-                      <a class="black-link" href="#!">
-                        Legal
-                      </a>
-                    </li>
-                    <li>
-                      <a class="black-link" href="#!">
-                        Help and Support
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="footer-copyright py-3 orange-text">
-              © 2019 Copyright:{" "}
-              <a class="black-link" href="http://www.runfinity.co.nz/">
-                Runfinity.co.nz
-              </a>
-            </div>
-          </footer>
+          <RunfinityFooter />
         </div>
       </div>
     );
