@@ -8,6 +8,8 @@ import { RunfinityNavbar } from "./Navbar.js";
 import "./css/home.css";
 
 import { Testimonials } from "./Testimonals";
+import { RotatingText } from "./Rotating-text";
+import "./css/rotating-text.css";
 
 export class Home extends Component {
   render() {
@@ -124,6 +126,7 @@ export class Home extends Component {
             </div>
           </div>
         </section>
+        <RotatingText />
         <Testimonials />
         <div>
           <RunfinityFooter />

@@ -18,7 +18,7 @@ const items = [
     developerName: "Jessica Menzies",
     caption: "Dunedin, NZ",
     review:
-      "It took me a while before I decided to do something about my weight. After graduating from school, I moved from the countryside to the city and began to study at university. It was during this time that a light went on in my head, and I started to live by the motto “Be the type of person you want to meet.”"
+      "I suffered from an injury to my ACL. I used Runfinity to track my speed and distance of my runs while i recovered from ACL reconstruction surgery. It has helped me immensely to keep track of my progress, and to also prove the doctor, pyhsio and my parents I am doing the exercise!"
   },
   {
     id: 2,
@@ -57,7 +57,7 @@ const items = [
     src:
       "https://scontent.fakl2-1.fna.fbcdn.net/v/t1.0-9/42494606_10210344253082973_4193796442239795200_n.jpg?_nc_cat=102&_nc_ht=scontent.fakl2-1.fna&oh=0d22e69eb72a32ff18d288bedf812165&oe=5CEBE893",
     developerName: "Hayden Parkinson",
-    caption: "Botany, Auckland",
+    caption: "Eden Terrace, Auckland",
     review:
       "I am good friends with the creators of Runfinity and have watched Runfinity be developed over the past year and a half. Gave my advice here and there and played with the User Interface to give them feedback. I don't like cardio exercises, but I hear they are going to be adding training programs for gym goers soon."
   }
@@ -111,7 +111,6 @@ export class Testimonials extends Component {
     const slides = items.map(item => {
       return (
         <CarouselItem
-          autoPlay
           className="custom-tag"
           tag="div"
           key={item.id}
@@ -138,6 +137,7 @@ export class Testimonials extends Component {
                 max-width: 100%;
                 height: 400px;
                 background: white;
+
               }
             .text-orange {
               color: orange;
