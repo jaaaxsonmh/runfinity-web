@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Home } from "./views/Home";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Legal } from "./views/Legal.js";
+import { Tos } from "./views/Termsofservice.js";
 import { MemberPortal } from "./views/MemberPortal.js";
 import { Premium } from "./views/Premium.js";
 import { Training } from "./views/Training.js";
@@ -28,6 +29,15 @@ class App extends Component {
             render={() => (
               <div className="App">
                 <Legal />
+              </div>
+            )}
+          />
+          <Route
+            exact={true}
+            path="/tos"
+            render={() => (
+              <div className="App">
+                <Tos />
               </div>
             )}
           />

@@ -3,10 +3,79 @@ html {
   height: 100%;
 }
 
-.legal-bg {
-  background-image: url(http://i.imgur.com/S1OsrYY.jpg);
+#view-legal {
+  text-align: left;
 }
 
-h1 {
+#view-legal li {
+  display: list-item;
+  padding-bottom: 5px;
+}
+
+#view-legal .section-border {
+  border-top: 1px solid #e6e6eb;
+  padding-top: 24px;
+  margin: 24px 0;
+}
+
+/* color for the container for text to sit on */
+.article-con .container {
+  background-color: white;
+}
+
+.legal-header {
   color: red;
+}
+
+/* aligning the navigation */
+#legal-navigation {
+  margin-top: 74px;
+}
+
+#legal-navigation ul {
+  list-style: none;
+}
+
+#legal-navigation li {
+  margin: 16px 0 16px 0;
+  display: list-item;
+}
+
+/* header of article */
+
+#view-legal h2 {
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+/* styles for navigations links (selected / unselected) */
+.legal-link {
+  color: orange;
+}
+
+.legal-link:hover {
+  color: orangered;
+}
+
+.selected {
+  color: black !important;
+  font-weight: 650;
+}
+
+.selected:hover {
+  text-decoration: none;
+}
+/* background image for jumbotron */
+.jumbotron {
+  background-color: white !important;
+
+  background: url(http://studio-bm.cz/wp-content/uploads/2014/04/blurred-bg.jpg)
+    no-repeat center center fixed;
+  margin: 0px !important;
+}
+
+.effective-date {
+  color: #99999e;
+  font-size: 14px;
 }

@@ -53,7 +53,7 @@ export class RunfinityFooter extends Component {
 
               <ul class="list-unstyled">
                 <li>
-                  <a class="black-link" href="#!">
+                  <a class="black-link" href="/tos">
                     Terms & Conditions
                   </a>
                 </li>
