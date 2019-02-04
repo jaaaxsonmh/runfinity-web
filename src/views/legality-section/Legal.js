@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 
-import { RunfinityFooter } from "./components/Footer.js";
-import { RunfinityNavbar } from "./components/Navbar.js";
+import { RunfinityFooter } from "../components/Footer.js";
+import { RunfinityNavbar } from "../components/Navbar.js";
 import { Jumbotron, Container } from "reactstrap";
-import "./css/legal.css";
-import "./images/logo.png";
+
+import "../css/legal.css";
+import "../images/logo.png";
 
 export class Legal extends Component {
   render() {
@@ -13,6 +14,7 @@ export class Legal extends Component {
         <div>
           <RunfinityNavbar />
         </div>
+
         <div class="article-con">
           <Jumbotron fluid className="jumbotron">
             <Container fluid className="container" id="view-legal">
@@ -38,7 +40,7 @@ export class Legal extends Component {
                 </div>
                 <article class="col-lg-7 col-md-9" id="legal-body">
                   <h2>Runfinity Legal Disclaimer</h2>
-                  <p class="effective-date">Effective Date: 02 November 2019</p>
+                  <p class="effective-date">Effective Date: 02 February 2019</p>
                   <section class="legal-use-of-website section-border">
                     <h3>
                       Terms and conditions for use of website and application

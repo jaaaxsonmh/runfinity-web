@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import { Home } from "./views/Home";
 import { BrowserRouter, Route } from "react-router-dom";
-import { Legal } from "./views/Legal.js";
-import { Tos } from "./views/Termsofservice.js";
+
 import { MemberPortal } from "./views/MemberPortal.js";
 import { Premium } from "./views/Premium.js";
 import { Training } from "./views/Training.js";
+
+/* Legality section imports */
+
+import { Legal } from "./views/legality-section/Legal.js";
+import { Privacy } from "./views/legality-section/privacy";
+import { Tos } from "./views/legality-section/Termsofservice.js";
 
 import "./App.css";
 
@@ -38,6 +43,15 @@ class App extends Component {
             render={() => (
               <div className="App">
                 <Tos />
+              </div>
+            )}
+          />
+          <Route
+            exact={true}
+            path="/privacy"
+            render={() => (
+              <div className="App">
+                <Privacy />
               </div>
             )}
           />
