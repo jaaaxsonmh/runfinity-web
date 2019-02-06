@@ -58,7 +58,7 @@ export class RunfinityFooter extends Component {
                   </a>
                 </li>
                 <li>
-                  <a class="black-link" href="#!">
+                  <a class="black-link" href="/privacy">
                     Privacy Policy
                   </a>
                 </li>
