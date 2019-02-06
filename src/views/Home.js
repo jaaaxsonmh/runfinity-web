@@ -83,7 +83,7 @@ export class Home extends Component {
                         </button>
 
                         <p class="padding">
-                          <a href="/signin" target="_blank">
+                          <a href="/login" target="_blank">
                             Already have access? click here
                           </a>
                         </p>
