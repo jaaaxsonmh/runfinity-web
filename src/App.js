@@ -13,6 +13,7 @@ import { Privacy } from "./views/legality-section/privacy";
 import { Tos } from "./views/legality-section/Termsofservice.js";
 
 import "./App.css";
+import { Login } from "./views/components/Login";
 
 class App extends Component {
   render() {
@@ -52,6 +53,16 @@ class App extends Component {
             render={() => (
               <div className="App">
                 <Privacy />
+              </div>
+            )}
+          />
+
+          <Route
+            exact={true}
+            path="/login"
+            render={() => (
+              <div className="App">
+                <Login />
               </div>
             )}
           />

@@ -1,30 +1,61 @@
-import React, { component } from "react";
+import React, { Component } from "react";
 import reactDOM from "react-dom";
+import "../css/login.scss";
+import { RunfinityNavbar } from "./Navbar";
+import { RunfinityFooter } from "./Footer";
 
-export class Login extends component {
+export class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { isLoginOpen: true, isRegisterOpen: false };
+  }
+
+  showLoginBox() {
+    this.setState({ isRegisterOpen: false, isLoginOpen: true });
+  }
+
+  showRegisterBox() {
+    this.setState({ isRegisterOpen: true, isLoginOpen: false });
   }
 
   render() {
     return (
-      <div className="root-container">
-        <div className="box-container">
+      <div>
+        <RunfinityNavbar />
+        <div className="root-container">
           <div className="box-controller">
-            <div className="controller">Log in</div>
+            <div
+              className={
+                "controller " +
+                (this.state.isLoginOpen ? "selected-controller" : "")
+              }
+              onClick={this.showLoginBox.bind(this)}
+            >
+              Log in
+            </div>
 
-            <div className="controller">Register</div>
+            <div
+              className={
+                "controller " +
+                (this.state.isRegisterOpen ? "selected-controller" : "")
+              }
+              onClick={this.showRegisterBox.bind(this)}
+            >
+              Register
+            </div>
+          </div>
+
+          <div className="box-container">
+            {this.state.isLoginOpen && <LoginBox />}
+            {this.state.isRegisterOpen && <RegisterBox />}
           </div>
         </div>
-
-        <div className="box-container" />
       </div>
     );
   }
 }
 
-class LoginBox extends component {
+class LoginBox extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -38,21 +69,20 @@ class LoginBox extends component {
         <div className="header">Login</div>
         <div className="box">
           <div className="input-group">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              name="username"
-              className="login-input"
-              placeholder="Username"
-            />
+            <label className="label-text" htmlFor="username">
+              Username
+            </label>
+            <input name="username" className="sign-in" placeholder="Username" />
           </div>
 
           <div className="input-group">
-            <label htmlFor="password">Password</label>
+            <label className="label-text" htmlFor="password">
+              Password
+            </label>
             <input
               type="password"
               name="password"
-              className="login-input"
+              className="sign-in"
               placeholder="Password"
             />
           </div>
@@ -70,7 +100,7 @@ class LoginBox extends component {
   }
 }
 
-class RegisterBox extends component {
+class RegisterBox extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -84,21 +114,20 @@ class RegisterBox extends component {
         <div className="header">Register</div>
         <div className="box">
           <div className="input-group">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              name="username"
-              className="login-input"
-              placeholder="Username"
-            />
+            <label className="label-text" htmlFor="username">
+              Username
+            </label>
+            <input name="username" className="sign-in" placeholder="Username" />
           </div>
 
           <div className="input-group">
-            <label htmlFor="password">Password</label>
+            <label className="label-text" htmlFor="password">
+              Password
+            </label>
             <input
               type="password"
               name="password"
-              className="login-input"
+              className="sign-in"
               placeholder="Password"
             />
           </div>

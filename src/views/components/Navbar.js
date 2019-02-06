@@ -52,7 +52,7 @@ export class RunfinityNavbar extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/components/">Log in</NavLink>
+              <NavLink href="/login">Log in</NavLink>
             </NavItem>
           </Nav>
         </Collapse>
