@@ -101,7 +101,7 @@ class LoginBox extends Component {
     this.setState({ pwdStrength: "weak" });
     if (e.target.value.length > 8 && e.target.value.length < 12) {
       this.setState({ pwdStrength: "medium" });
-    } else if (e.target.value.length > 12) {
+    } else if (e.target.value.length >= 12) {
       this.setState({ pwdStrength: "strong" });
     }
   }
