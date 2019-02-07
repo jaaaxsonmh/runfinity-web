@@ -72,7 +72,7 @@ class LoginBox extends Component {
     this.setState(prevState => {
       let newErr = [];
       for (let err of prevState.errors) {
-        if (elm != err.elem) {
+        if (elm !== err.elem) {
           newErr.push(err);
         }
       }
@@ -134,42 +134,55 @@ class RegisterBox extends Component {
     this.state = { email: "", name: "", errors: [] };
   }
 
+  // when submitted check validation TODO: redirect page and request from server (nikita)
   submitRegister(e) {
-    if (this.state.name == "") {
-      return this.showValidationErr("register-name", "Name cannot be empty!");
-    } else if (this.state.email == "") {
-      return this.showValidationErr("email", "Email cannot be empty!");
+    if (this.state.name === "") {
+      this.showValidationErr("name", "Name cannot be empty!");
+    }
+    if (this.state.email === "") {
+      this.showValidationErr("email", "Email cannot be empty!");
     }
   }
 
+  // add error objects to the array
   showValidationErr(elm, msg) {
     this.setState(prevState => ({
       errors: [...prevState.errors, { elm, msg }]
     }));
   }
 
+  // remove element from the array
   clearValidaitonErr(elm) {
     this.setState(prevState => {
       let newErr = [];
+
+      // add emelments from prev array to new one
       for (let err of prevState.errors) {
-        if (elm != err.elem) {
+        if (elm !== err.elm) {
           newErr.push(err);
         }
       }
-      return newErr;
+      return { errors: newErr };
     });
   }
 
+  //update values on change of events
   onEmailChange(e) {
     this.setState({
       email: e.target.value
     });
+    //clear the error when something new is typed
+
+    this.clearValidaitonErr("email");
   }
 
   onNameChange(e) {
     this.setState({
       name: e.target.value
     });
+    //clear the error when something new is typed
+
+    this.clearValidaitonErr("name");
   }
 
   render() {
@@ -177,10 +190,10 @@ class RegisterBox extends Component {
       nameErr = null;
 
     for (let err of this.state.errors) {
-      if (err.elm == "register-name") {
+      if (err.elm === "name") {
         nameErr = err.msg;
       }
-      if (err.elm == "email") {
+      if (err.elm === "email") {
         emailErr = err.msg;
       }
     }
@@ -199,7 +212,9 @@ class RegisterBox extends Component {
               placeholder="Email"
               onChange={this.onEmailChange.bind(this)}
             />
-            <small className="danger-error">{emailErr ? emailErr : ""}</small>
+            <small className="danger-error label-text">
+              {emailErr ? emailErr : ""}
+            </small>
           </div>
 
           <div className="input-group">
@@ -207,12 +222,14 @@ class RegisterBox extends Component {
               Name
             </label>
             <input
-              name="register-name"
+              name="name"
               className="sign-in"
               placeholder="Name"
               onChange={this.onNameChange.bind(this)}
             />
-            <small className="danger-error">{nameErr ? nameErr : ""}</small>
+            <small className="danger-error label-text">
+              {nameErr ? nameErr : ""}
+            </small>
           </div>
 
           <button
