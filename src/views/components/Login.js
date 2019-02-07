@@ -123,12 +123,12 @@ class LoginBox extends Component {
       pwdMedium = false,
       pwdStrong = false;
 
-    if (this.state.pwdStrength == "weak") {
+    if (this.state.pwdStrength === "weak") {
       pwdWeak = true;
-    } else if (this.state.pwdStrength == "medium") {
+    } else if (this.state.pwdStrength === "medium") {
       pwdWeak = true;
       pwdMedium = true;
-    } else if (this.state.pwdStrength == "strong") {
+    } else if (this.state.pwdStrength === "strong") {
       pwdWeak = true;
       pwdMedium = true;
       pwdStrong = true;
