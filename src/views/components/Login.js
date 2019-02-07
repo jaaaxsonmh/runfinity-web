@@ -57,10 +57,17 @@ export class Login extends Component {
 class LoginBox extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: "", password: "", errors: [] };
+    this.state = { email: "", password: "", errors: [] };
   }
 
-  submitLogin(e) {}
+  submitLogin(e) {
+    if (this.state.email === "") {
+      this.showValidationErr("email", "Email cannot be empty!");
+    }
+    if (this.state.password === "") {
+      this.showValidationErr("password", "Password cannot be empty!");
+    }
+  }
 
   showValidationErr(elm, msg) {
     this.setState(prevState => ({
@@ -72,25 +79,61 @@ class LoginBox extends Component {
     this.setState(prevState => {
       let newErr = [];
       for (let err of prevState.errors) {
-        if (elm !== err.elem) {
+        if (elm !== err.elm) {
           newErr.push(err);
         }
       }
-      return newErr;
+      return { errors: newErr };
     });
   }
 
-  onUsernameChange(e) {
+  onEmailChange(e) {
     this.setState({
-      Username: e.target.value
+      email: e.target.value
     });
+    this.clearValidaitonErr("email");
   }
 
   onPasswordChange(e) {
     this.setState({ password: e.target.value });
+    this.clearValidaitonErr("password");
+
+    this.setState({ pwdStrength: "weak" });
+    if (e.target.value.length > 8 && e.target.value.length < 12) {
+      this.setState({ pwdStrength: "medium" });
+    } else if (e.target.value.length > 12) {
+      this.setState({ pwdStrength: "strong" });
+    }
   }
 
   render() {
+    let emailErr = null,
+      pwdErr = null;
+
+    for (let err of this.state.errors) {
+      if (err.elm === "password") {
+        pwdErr = err.msg;
+      }
+      if (err.elm === "email") {
+        emailErr = err.msg;
+      }
+    }
+
+    let pwdWeak = false,
+      pwdMedium = false,
+      pwdStrong = false;
+
+    if (this.state.pwdStrength == "weak") {
+      pwdWeak = true;
+    } else if (this.state.pwdStrength == "medium") {
+      pwdWeak = true;
+      pwdMedium = true;
+    } else if (this.state.pwdStrength == "strong") {
+      pwdWeak = true;
+      pwdMedium = true;
+      pwdStrong = true;
+    }
+
     return (
       <div className="inner-container">
         <div className="header">Login</div>
@@ -99,7 +142,15 @@ class LoginBox extends Component {
             <label className="label-text" htmlFor="Email">
               Email
             </label>
-            <input name="username" className="sign-in" placeholder="Username" />
+            <input
+              name="email"
+              className="sign-in"
+              placeholder="email"
+              onChange={this.onEmailChange.bind(this)}
+            />
+            <small className="danger-error label-text">
+              {emailErr ? emailErr : ""}
+            </small>
           </div>
 
           <div className="input-group">
@@ -113,6 +164,21 @@ class LoginBox extends Component {
               placeholder="Password"
               onChange={this.onPasswordChange.bind(this)}
             />
+            <small className="danger-error label-text">
+              {pwdErr ? pwdErr : ""}
+            </small>
+
+            {this.state.password && (
+              <div className="password-state">
+                <div className={"pwd pwd-weak " + (pwdWeak ? "show" : "")} />
+                <div
+                  className={"pwd pwd-medium " + (pwdMedium ? "show" : "")}
+                />
+                <div
+                  className={"pwd pwd-strong " + (pwdStrong ? "show" : "")}
+                />
+              </div>
+            )}
           </div>
 
           <button
