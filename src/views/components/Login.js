@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import reactDOM from "react-dom";
 import "../css/login.scss";
 import { RunfinityNavbar } from "./Navbar";
-import { RunfinityFooter } from "./Footer";
 
 export class Login extends Component {
   constructor(props) {
@@ -22,6 +20,7 @@ export class Login extends Component {
     return (
       <div>
         <RunfinityNavbar />
+
         <div className="root-container">
           <div className="box-controller">
             <div
