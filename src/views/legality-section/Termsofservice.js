@@ -245,7 +245,7 @@ export class Tos extends Component {
                       you hold the ability to restore your previous Member Data
                       (within 3 month deletion threshold) or for your previous
                       Member Data to be deleted. If you re-join the closed beta
-                      after the 3 months period
+                      after the 3 months period you will need to re-establish your Member Data.
                     </p>
                   </section>
                   <section class="section-border" id="content">
