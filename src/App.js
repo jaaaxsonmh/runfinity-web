@@ -44,7 +44,6 @@ class App extends Component {
     return (
 
       <BrowserRouter>
-          {this.state.user ? (<MemberPortal/>) : (<Login/>)}
         <div>
           <Route
             exact={true}
@@ -86,9 +85,10 @@ class App extends Component {
           <Route
             exact={true}
             path="/login"
+
             render={() => (
               <div className="App">
-                <Login />
+                  {this.state.user ? (<MemberPortal/>) : (<Login/>)}
               </div>
             )}
           />
