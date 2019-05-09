@@ -167,18 +167,6 @@ class LoginBox extends Component {
             <small className="danger-error label-text">
               {pwdErr ? pwdErr : ""}
             </small>
-
-            {this.state.password && (
-              <div className="password-state">
-                <div className={"pwd pwd-weak " + (pwdWeak ? "show" : "")} />
-                <div
-                  className={"pwd pwd-medium " + (pwdMedium ? "show" : "")}
-                />
-                <div
-                  className={"pwd pwd-strong " + (pwdStrong ? "show" : "")}
-                />
-              </div>
-            )}
           </div>
 
           <button
@@ -197,7 +185,7 @@ class LoginBox extends Component {
 class RegisterBox extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", name: "", errors: [] };
+    this.state = { email: "", name: "", password: "", errors: [] };
   }
 
   // when submitted check validation TODO: redirect page and request from server (nikita)
@@ -208,6 +196,9 @@ class RegisterBox extends Component {
     if (this.state.email === "") {
       this.showValidationErr("email", "Email cannot be empty!");
     }
+      if (this.state.password === "") {
+          this.showValidationErr("password", "Password cannot be empty!");
+      }
   }
 
   // add error objects to the array
@@ -248,12 +239,27 @@ class RegisterBox extends Component {
     });
     //clear the error when something new is typed
 
+
+
     this.clearValidaitonErr("name");
   }
 
+    onPasswordChange(e) {
+        this.setState({ password: e.target.value });
+        this.clearValidaitonErr("password");
+
+        this.setState({ pwdStrength: "weak" });
+        if (e.target.value.length > 8 && e.target.value.length < 12) {
+            this.setState({ pwdStrength: "medium" });
+        } else if (e.target.value.length >= 12) {
+            this.setState({ pwdStrength: "strong" });
+        }
+    }
+
   render() {
     let emailErr = null,
-      nameErr = null;
+      nameErr = null,
+    pwdErr = null;
 
     for (let err of this.state.errors) {
       if (err.elm === "name") {
@@ -262,7 +268,25 @@ class RegisterBox extends Component {
       if (err.elm === "email") {
         emailErr = err.msg;
       }
+        if (err.elm === "password") {
+            pwdErr = err.msg;
+        }
     }
+
+      let pwdWeak = false,
+          pwdMedium = false,
+          pwdStrong = false;
+
+      if (this.state.pwdStrength === "weak") {
+          pwdWeak = true;
+      } else if (this.state.pwdStrength === "medium") {
+          pwdWeak = true;
+          pwdMedium = true;
+      } else if (this.state.pwdStrength === "strong") {
+          pwdWeak = true;
+          pwdMedium = true;
+          pwdStrong = true;
+      }
 
     return (
       <div className="inner-container">
@@ -297,6 +321,34 @@ class RegisterBox extends Component {
               {nameErr ? nameErr : ""}
             </small>
           </div>
+
+            <div className="input-group">
+                <label className="label-text" htmlFor="password">
+                    Password
+                </label>
+                <input
+                    type="password"
+                    name="password"
+                    className="sign-in"
+                    placeholder="Password"
+                    onChange={this.onPasswordChange.bind(this)}
+                />
+                <small className="danger-error label-text">
+                    {pwdErr ? pwdErr : ""}
+                </small>
+
+                {this.state.password && (
+                    <div className="password-state">
+                        <div className={"pwd pwd-weak " + (pwdWeak ? "show" : "")} />
+                        <div
+                            className={"pwd pwd-medium " + (pwdMedium ? "show" : "")}
+                        />
+                        <div
+                            className={"pwd pwd-strong " + (pwdStrong ? "show" : "")}
+                        />
+                    </div>
+                )}
+            </div>
 
           <button
             type="button"
