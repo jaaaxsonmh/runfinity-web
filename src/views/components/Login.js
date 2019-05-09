@@ -308,5 +308,6 @@ class RegisterBox extends Component {
         </div>
       </div>
     );
+
   }
 }

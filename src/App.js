@@ -6,6 +6,8 @@ import { MemberPortal } from "./views/MemberPortal.js";
 import { Premium } from "./views/Premium.js";
 import { Training } from "./views/Training.js";
 
+import fire from "./config/Firebase";
+
 /* Legality section imports */
 
 import { Legal } from "./views/legality-section/Legal.js";
@@ -16,9 +18,33 @@ import "./App.css";
 import { Login } from "./views/components/Login";
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            user:{},
+        }
+    }
+
+    componentDidMount() {
+        this.authListener();
+    }
+
+    authListener() {
+        fire.auth().onAuthStateChanged((user) => {
+            if(user) {
+                this.setState({user});
+            } else {
+                this.setState({user: null});
+            }
+        });
+    }
+
   render() {
     return (
+
       <BrowserRouter>
+          {this.state.user ? (<MemberPortal/>) : (<Login/>)}
         <div>
           <Route
             exact={true}
