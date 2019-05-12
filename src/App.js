@@ -31,6 +31,8 @@ class App extends Component {
     }
 
     authListener() {
+        console.log(this.state.user);
+
         fire.auth().onAuthStateChanged((user) => {
             if(user) {
                 this.setState({user});
@@ -40,9 +42,9 @@ class App extends Component {
         });
     }
 
+
   render() {
     return (
-
       <BrowserRouter>
         <div>
           <Route
@@ -90,8 +92,9 @@ class App extends Component {
               <div className="App">
                   {this.state.user ? (<MemberPortal/>) : (<Login/>)}
               </div>
-            )}
-          />
+                )}
+        />
+
         </div>
       </BrowserRouter>
     );
