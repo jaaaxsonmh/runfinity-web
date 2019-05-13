@@ -102,6 +102,7 @@ class LoginBox extends Component {
 
     onPasswordChange(e) {
         this.setState({password: e.target.value});
+        this.clearValidaitonErr("password");
     }
 
     render() {
