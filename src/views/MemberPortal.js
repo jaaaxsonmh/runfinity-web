@@ -9,16 +9,25 @@ import {
   CardImg,
   CardSubtitle,
   CardText,
-  CardTitle,
+  CardTitle, Col, Container,
   ListGroup, ListGroupItem,
-  Progress, Spinner
+  Progress, Row, Spinner
 } from "reactstrap";
 import moment from "moment";
-import {RunfinityFooter} from "./components/Footer";
+import momentDurationFormatSetup from "moment-duration-format";
+
+import caloriesIcon from "./images/calories.svg";
+import distanceIcon from "./images/road.svg";
+import timeIcon from "./images/time.svg";
+import stepsIcon from "./images/steps.svg";
+import paceIcon from "./images/pace.svg";
 
 const API_SERVER = "https://api.runfinity.co.nz";
+
 //const API_SERVER = "http://localhost:3020";
 
+
+momentDurationFormatSetup(moment);
 
 export class MemberPortal extends Component {
 
@@ -106,13 +115,21 @@ export class MemberPortal extends Component {
 
   _renderRunData() {
     let data = this.state.userData;
+    // https://static.runfinity.co.nz/maps/api/staticmap?size=400x400&path=weight:3%7Ccolor:blue%7Cenc:ha}_F}eui`@JD
     return (
       <div className="container">
 
         {
           data.map((runData) => {
 
-            let runDate = moment(runData.startTime).format('ddd Do MMMM');
+
+            let startRunDate = moment(runData.startTime);
+            let endRunDate = moment(runData.endTime);
+
+            let runDate = startRunDate.format('ddd Do MMMM h:mm:ss a');
+
+            let runDuration = moment.duration(endRunDate.diff(startRunDate));
+
 
             let steps = runData.steps;
             let cals = Math.round(runData.calories * 100) / 100;
@@ -125,15 +142,53 @@ export class MemberPortal extends Component {
                 key={runData._id}>
                 <Card>
                   <CardBody>
+                    <img
+                      src={"https://static.runfinity.co.nz/maps/api/staticmap?size=400x400&path=weight:3%7Ccolor:blue%7Cenc:ha}_F}eui`@JD"}/>
                     <h5 align={"left"}>{runDate}</h5>
 
                     <hr/>
 
-                    <h5 align={"left"}>Steps: {steps}</h5>
-                    <h5 align={"left"}>Calories: {cals}</h5>
-                    <h5 align={"left"}>Distance: {distance}</h5>
-                    <h5 align={"left"}>Pace: {pace}</h5>
+                    <Container>
+                      <Row>
 
+                        <Col>
+                          <img
+                            src={distanceIcon}/>
+                          <p>{distance}</p>
+                          <p>Distance</p>
+                        </Col>
+
+                        <Col>
+                          <img
+                            src={timeIcon}/>
+                          <p>{this._buildRunDuration(runDuration)}</p>
+                          <p>Duration</p>
+                        </Col>
+
+                        <Col>
+                          <img
+                            src={caloriesIcon}/>
+                          <p>{cals}</p>
+                          <p>Calories</p>
+                        </Col>
+
+                        <Col>
+                          <img
+                            src={stepsIcon}/>
+                          <p>{steps}</p>
+                          <p>Steps</p>
+                        </Col>
+
+                        <Col>
+                          <img
+                            src={paceIcon}/>
+                          <p>{pace}</p>
+                          <p>Pace</p>
+                        </Col>
+
+                      </Row>
+
+                    </Container>
 
                   </CardBody>
                 </Card>
@@ -144,5 +199,9 @@ export class MemberPortal extends Component {
 
       </div>
     );
+  }
+
+  _buildRunDuration(duration) {
+    return duration.format("hh [hrs] mm [min] ss [secs]");
   }
 }
