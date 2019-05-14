@@ -15,6 +15,7 @@ import {
 } from "reactstrap";
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
+import polyUtil from 'polyline-encoded';
 
 import caloriesIcon from "./images/calories.svg";
 import distanceIcon from "./images/road.svg";
@@ -136,6 +137,12 @@ export class MemberPortal extends Component {
             let distance = Math.round(runData.distance * 100) / 100;
             let pace = runData.averageSpeed;
 
+
+            let encodedPath = this._encodeRunPath(runData);
+
+            console.log("encodedPath:" , encodedPath)
+
+
             return (
               <div
                 className="container"
@@ -143,7 +150,8 @@ export class MemberPortal extends Component {
                 <Card>
                   <CardBody>
                     <img
-                      src={"https://static.runfinity.co.nz/maps/api/staticmap?size=400x400&path=weight:3%7Ccolor:blue%7Cenc:ha}_F}eui`@JD"}/>
+                      className={"rounded-circle"}
+                      src={`https://static.runfinity.co.nz/maps/api/staticmap?size=400x400&path=weight:3%7Ccolor:blue%7Cenc:${encodedPath}`}/>
                     <h5 align={"left"}>{runDate}</h5>
 
                     <hr/>
@@ -154,7 +162,7 @@ export class MemberPortal extends Component {
                         <Col>
                           <img
                             src={distanceIcon}/>
-                          <p>{distance}</p>
+                          <p>{distance} m</p>
                           <p>Distance</p>
                         </Col>
 
@@ -203,5 +211,14 @@ export class MemberPortal extends Component {
 
   _buildRunDuration(duration) {
     return duration.format("hh [hrs] mm [min] ss [secs]");
+  }
+
+  _encodeRunPath(runData) {
+    let latlngs = [];
+    runData.locationPoints.forEach((point) => {
+      latlngs.push([point.latLng.latitude, point.latLng.longitude])
+    });
+
+    return polyUtil.encode(latlngs);
   }
 }

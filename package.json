@@ -8,12 +8,14 @@
     "moment": "^2.24.0",
     "moment-duration-format": "^2.2.2",
     "node-sass": "^4.11.0",
+    "polyline-encoded": "0.0.8",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-router-dom": "latest",
     "react-scripts": "^2.1.5",
     "reactjs-navigation": "^0.3.9",
-    "reactstrap": "^7.1.0"
+    "reactstrap": "^7.1.0",
+    "simplify-js": "^1.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
