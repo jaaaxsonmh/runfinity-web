@@ -97,7 +97,7 @@ class LoginBox extends Component {
       // The firebase.auth.AuthCredential type that was used.
       let credential = error.credential;
       // ...
-      console.log("signInWithPopup -> error")
+      console.log("signInWithPopup -> error", error)
     });
   }
 
