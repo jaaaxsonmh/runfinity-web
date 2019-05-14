@@ -9,6 +9,8 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
+import * as firebase from "firebase";
+
 
 export class RunfinityNavbar extends Component {
   state = {};
@@ -16,9 +18,18 @@ export class RunfinityNavbar extends Component {
   constructor(props) {
     super(props);
 
+    firebase.auth().onAuthStateChanged((user) => {
+
+      this.setState({
+        fireUser: user
+      });
+
+    });
+
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: true
+      collapsed: true,
+      fireUser: null,
     };
   }
 
@@ -29,6 +40,9 @@ export class RunfinityNavbar extends Component {
   }
 
   render() {
+    let userPageTitle = this.state.fireUser ? "Member portal" : "Log in";
+
+
     return (
       <Navbar color="white" light expand="md">
         <NavbarBrand href="/">
@@ -41,10 +55,10 @@ export class RunfinityNavbar extends Component {
               <NavLink href="/">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/components/">Premium</NavLink>
+              <NavLink href="/">Premium</NavLink>
             </NavItem>
             <NavItem background-color="red">
-              <NavLink href="/components/">Training</NavLink>
+              <NavLink href="/">Training</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="https://www.github.com/jaaaxsonmh/runfinity-web">
@@ -52,7 +66,7 @@ export class RunfinityNavbar extends Component {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/login">Log in</NavLink>
+              <NavLink href="/login" style={{color: '#ff9010', textDecoration: 'none'}}>{userPageTitle}</NavLink>
             </NavItem>
           </Nav>
         </Collapse>
