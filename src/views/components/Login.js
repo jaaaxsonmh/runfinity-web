@@ -76,7 +76,7 @@ class LoginBox extends Component {
   }
 
 
-  loginWithGoogle(e) {
+  loginWithGoogle() {
     let provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().languageCode = 'en';
 
