@@ -9,28 +9,9 @@ import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
 import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText, expanded} from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import styled from 'styled-components';
 
 
 const API_SERVER = "https://api.runfinity.co.nz";
-
-const NavHeader = styled.div`
-    display: ${props => (props.expanded ? 'block' : 'none')};
-    white-space: nowrap;
-    background-color: #db3d44;
-    color: #fff;
-
-    > * {
-        color: inherit;
-        background-color: inherit;
-    }
-`;
-
-const NavTitle = styled.div`
-    font-size: 2em;
-    line-height: 20px;
-    padding: 10px 0;
-`;
 
 //const API_SERVER = "http://localhost:3020";
 momentDurationFormatSetup(moment);
@@ -93,11 +74,9 @@ export class MemberPortal extends Component {
                     <SideNav
                         onSelect={this.onSelect}
                         onToggle={this.onToggle}>
-                        <SideNav.Toggle/>
-                        <NavHeader expanded={expanded}>
-                            <NavTitle>{user.displayName}</NavTitle>
-                        </NavHeader>
-                        <SideNav.Nav defaultSelected="overview">
+                        <Toggle/>
+
+                        <Nav defaultSelected="overview">
                             <NavItem eventKey="overview" onClick={() => {
                                 this.showOverview()
                             }}>
@@ -128,10 +107,11 @@ export class MemberPortal extends Component {
                                     Logout
                                 </NavText>
                             </NavItem>
-                        </SideNav.Nav>
+                        </Nav>
                     </SideNav>
 
                     <img className={"carousel-info"} src={user.photoURL} alt={user.displayName}/>
+                    <h3>Welcome {user.displayName}</h3>
 
                     <div>
                         {this.state.isHistoryOpen && <History/>}
