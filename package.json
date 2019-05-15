@@ -16,7 +16,8 @@
     "react-scripts": "^2.1.5",
     "reactjs-navigation": "^0.3.9",
     "reactstrap": "^7.1.0",
-    "simplify-js": "^1.2.3"
+    "simplify-js": "^1.2.3",
+    "styled-components": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

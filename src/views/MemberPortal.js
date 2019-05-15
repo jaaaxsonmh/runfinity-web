@@ -2,20 +2,43 @@ import React, {Component} from "react";
 import firebase from "firebase";
 import {RunfinityNavbar} from "./components/Navbar";
 import {History} from "./components/History";
+import logoutIcon from "./images/logout.png";
+import historyIcon from "./images/history.png";
+import overviewIcon from "./images/overview.png";
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
-import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
+import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText, expanded} from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import styled from 'styled-components';
+
 
 const API_SERVER = "https://api.runfinity.co.nz";
+
+const NavHeader = styled.div`
+    display: ${props => (props.expanded ? 'block' : 'none')};
+    white-space: nowrap;
+    background-color: #db3d44;
+    color: #fff;
+
+    > * {
+        color: inherit;
+        background-color: inherit;
+    }
+`;
+
+const NavTitle = styled.div`
+    font-size: 2em;
+    line-height: 20px;
+    padding: 10px 0;
+`;
 
 //const API_SERVER = "http://localhost:3020";
 momentDurationFormatSetup(moment);
 
 export class MemberPortal extends Component {
-
     constructor(props) {
         super(props);
+        this.state = {isOverviewOpen: true, isHistoryOpen: false};
 
         firebase.auth().onAuthStateChanged((user) => {
             this.setState({
@@ -45,28 +68,41 @@ export class MemberPortal extends Component {
 
     }
 
+
     logOut() {
         firebase.auth().signOut();
     }
 
+    showOverview() {
+        this.setState({isOverviewOpen: true, isHistoryOpen: false});
+    }
+
     showHistory() {
-        return <History/>
+        this.setState({isOverviewOpen: false, isHistoryOpen: true});
     }
 
     render() {
         let user = this.state.fireUser;
+
 
         if (user) {
             return (
                 <div>
                     <RunfinityNavbar/>
 
-                    <SideNav>
+                    <SideNav
+                        onSelect={this.onSelect}
+                        onToggle={this.onToggle}>
                         <SideNav.Toggle/>
+                        <NavHeader expanded={expanded}>
+                            <NavTitle>{user.displayName}</NavTitle>
+                        </NavHeader>
                         <SideNav.Nav defaultSelected="overview">
-                            <NavItem eventKey="overview">
+                            <NavItem eventKey="overview" onClick={() => {
+                                this.showOverview()
+                            }}>
                                 <NavIcon>
-                                    <i className="fa fa-fw fa-overview" style={{fontSize: '1.75em'}}/>
+                                    <img src={overviewIcon} />
                                 </NavIcon>
                                 <NavText>
                                     Overview
@@ -76,28 +112,31 @@ export class MemberPortal extends Component {
                                 this.showHistory()
                             }}>
                                 <NavIcon>
-                                    <i className="fa fa-fw fa-history" style={{fontSize: '1.75em'}}/>
+                                    <img src={historyIcon}/>
                                 </NavIcon>
                                 <NavText>
                                     History
                                 </NavText>
                             </NavItem>
-
-                            <NavItem eventKey="signout" onClick={() => {
+                            <NavItem eventKey="logout" onClick={() => {
                                 this.logOut()
                             }}>
                                 <NavIcon>
-                                    <i className="fa fa-fw fa-signout" style={{fontSize: '1.75em'}}/>
+                                    <img src={logoutIcon}  />
                                 </NavIcon>
                                 <NavText>
-                                    Sign Out
+                                    Logout
                                 </NavText>
                             </NavItem>
                         </SideNav.Nav>
                     </SideNav>
 
                     <img className={"carousel-info"} src={user.photoURL} alt={user.displayName}/>
-                    <h1>{user.displayName}</h1>
+
+                    <div>
+                        {this.state.isHistoryOpen && <History/>}
+                        {/*{this.state.isOverviewOpen && <Overview/>}*/}
+                    </div>
 
                     <div>
                         <style>
@@ -117,4 +156,6 @@ export class MemberPortal extends Component {
         }
         return false;
     }
+
+
 }
