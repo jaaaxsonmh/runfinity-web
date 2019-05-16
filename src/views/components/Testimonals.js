@@ -24,7 +24,7 @@ const items = [
     id: 2,
     altText: "Broken here :( ",
     src:
-      "https://scontent.fakl2-1.fna.fbcdn.net/v/t1.0-9/12801535_980267182069423_4658091181829951622_n.jpg?_nc_cat=101&_nc_ht=scontent.fakl2-1.fna&oh=1422849296881e44f25261df4bb96c2a&oe=5CB69599",
+      "https://scontent.fakl2-1.fna.fbcdn.net/v/t1.0-9/12801535_980267182069423_4658091181829951622_n.jpg?_nc_cat=101&_nc_ht=scontent.fakl2-1.fna&oh=0dd225f6eff722be3543ac711dcc3d7d&oe=5D54C999",
 
     developerName: "James Eady",
     caption: "Devonport, Auckland",
