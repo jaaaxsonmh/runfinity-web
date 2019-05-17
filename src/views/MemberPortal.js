@@ -7,7 +7,7 @@ import historyIcon from "./images/history.png";
 import overviewIcon from "./images/overview.png";
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
-import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText, expanded} from '@trendmicro/react-sidenav';
+import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 
@@ -32,7 +32,6 @@ export class MemberPortal extends Component {
                 .then((data) => {
                     return data.json();
                 }).then((data) => {
-
                 this.setState({
                     userData: data
                 });
