@@ -9,6 +9,7 @@ import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
 import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import {Overview} from "./components/Overview";
 
 
 const API_SERVER = "https://api.runfinity.co.nz";
@@ -80,6 +81,7 @@ export class MemberPortal extends Component {
     let user = this.state.fireUser;
 
 
+
     if (user) {
       return (
         <div>
@@ -97,7 +99,8 @@ export class MemberPortal extends Component {
           <div>
             <style>
               {
-                `.carousel-info {
+
+                                `.carousel-info {
                                      border: 3px solid orange;
                                       border-radius: 100px !important;
                                       height: 150px;
