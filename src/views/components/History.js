@@ -38,7 +38,6 @@ export class History extends Component {
                 this.setState({
                     userData: data
                 });
-
             }).catch((error) => {
                 console.log("catch", error)
             })
@@ -80,20 +79,29 @@ export class History extends Component {
             );
         } else {
             return <div>
+                {this._sortRunData()}
                 {this._renderRunData()}
             </div>
         }
     }
 
+    _sortRunData() {
+        this.state.userData.sort(function(arg1, arg2){
+            return arg2.startTime - arg1.startTime;
+        });
+    }
+
     _renderRunData() {
         let data = this.state.userData;
         // https://static.runfinity.co.nz/maps/api/staticmap?size=400x400&path=weight:3%7Ccolor:blue%7Cenc:ha}_F}eui`@JD
+
+
+
         return (
             <div className="container">
 
                 {
                     data.map((runData) => {
-
 
                         let startRunDate = moment(runData.startTime);
                         let endRunDate = moment(runData.endTime);
