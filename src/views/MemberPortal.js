@@ -22,7 +22,6 @@ const MEMBER_HISTORY = "MEMBER_HISTORY";
 export class MemberPortal extends Component {
   constructor(props) {
     super(props);
-    this.state = {isOverviewOpen: true, isHistoryOpen: false};
 
     firebase.auth().onAuthStateChanged((user) => {
       this.setState({
