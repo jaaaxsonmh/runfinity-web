@@ -9,6 +9,7 @@ import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
 import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import {Overview} from "./components/Overview";
 
 
 const API_SERVER = "https://api.runfinity.co.nz";
@@ -114,7 +115,7 @@ export class MemberPortal extends Component {
 
                     <div>
                         {this.state.isHistoryOpen && <History/>}
-                        {/*{this.state.isOverviewOpen && <Overview/>}*/}
+                        {this.state.isOverviewOpen && <Overview/>}
                     </div>
 
                     <div>
