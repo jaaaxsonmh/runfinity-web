@@ -42,13 +42,13 @@ export class Overview extends Component {
                 let steps = this.state.stepsTotal;
 
                 data.forEach(function (userData) {
-                    console.log("cals:" +userData.calories)
+                    console.log("cals:" +userData.calories);
                     calories += userData.calories;
-                    console.log("dist:" +userData.distance)
+                    console.log("dist:" +userData.distance);
                     distance += userData.distance;
-                    console.log("speed:" +userData.averageSpeed)
+                    console.log("speed:" +userData.averageSpeed);
                     averageSpeed += userData.averageSpeed;
-                    console.log("Steps:" + userData.steps)
+                    console.log("Steps:" + userData.steps);
                     steps += userData.steps;
                 });
 
