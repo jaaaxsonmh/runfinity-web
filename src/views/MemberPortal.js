@@ -21,84 +21,100 @@ const MEMBER_OVERVIEW = "MEMBER_OVERVIEW";
 const MEMBER_HISTORY = "MEMBER_HISTORY";
 
 export class MemberPortal extends Component {
-  constructor(props) {
-    super(props);
+    totals = {
+        calories: 0,
+        distance: 0,
+        steps: 0,
+        averageSpeed: 0,
+    };
 
-    firebase.auth().onAuthStateChanged((user) => {
-      this.setState({
-        fireUser: user
-      });
+    constructor(props) {
+        super(props);
 
-      console.log(user.uid);
+        firebase.auth().onAuthStateChanged((user) => {
+            this.setState({
+                fireUser: user
+            });
 
-      fetch(API_SERVER + "/getCloudDatabase" + "/" + user.uid)
-        .then((data) => {
-          // Convert data to JSON
-          return data.json();
-        }).then((data) => {
-        // Sort data here
-        let sorted = data.sort((runA, runB) => {
-          return runB.startTime - runA.startTime;
+            console.log(user.uid);
+
+            fetch(API_SERVER + "/getCloudDatabase" + "/" + user.uid)
+                .then((data) => {
+                    // Convert data to JSON
+                    return data.json();
+                }).then((data) => {
+
+                data.forEach(userData => {
+                    console.log("cals:" + userData.calories);
+                    this.totals.calories += userData.calories;
+                    console.log("dist:" + userData.distance);
+                    this.totals.distance += userData.distance;
+                    console.log("speed:" + userData.averageSpeed);
+                    this.totals.averageSpeed += userData.averageSpeed;
+                    console.log("Steps:" + userData.steps);
+                    this.totals.steps += userData.steps;
+                });
+
+                let sorted = data.sort((runA, runB) => {
+                    return runB.startTime - runA.startTime;
+                });
+                return sorted;
+            }).then((data) => {
+                this.setState({
+                    userData: data
+                });
+
+            }).catch((error) => {
+                console.log("catch", error)
+            })
         });
-        return sorted;
-      }).then((data) => {
-        this.setState({
-          userData: data
-        });
 
-      }).catch((error) => {
-        console.log("catch", error)
-      })
-    });
+        this.state = {
+            userData: null,
+            fireUser: null,
+            selectedNav: MEMBER_OVERVIEW
+        }
 
-    this.state = {
-      userData: null,
-      fireUser: null,
-      selectedNav: MEMBER_OVERVIEW
     }
 
-  }
+
+    logOut() {
+        firebase.auth().signOut();
+    }
+
+    showOverview() {
+        this.setState({
+            selectedNav: MEMBER_OVERVIEW
+        });
+    }
+
+    showHistory() {
+        this.setState({
+            selectedNav: MEMBER_HISTORY
+        });
+    }
 
 
-  logOut() {
-    firebase.auth().signOut();
-  }
+    render() {
+        let user = this.state.fireUser;
 
-  showOverview() {
-    this.setState({
-      selectedNav: MEMBER_OVERVIEW
-    });
-  }
+        if (user) {
+            return (
+                <div>
+                    <RunfinityNavbar/>
 
-  showHistory() {
-    this.setState({
-      selectedNav: MEMBER_HISTORY
-    });
-  }
+                    {this._renderSideNav()}
 
+                    <img className={"carousel-info"} src={user.photoURL} alt={user.displayName}/>
+                    <h3>Welcome {user.displayName}</h3>
 
-  render() {
-    let user = this.state.fireUser;
+                    <div>
+                        {this._renderSelectedNav()}
+                    </div>
 
-
-
-    if (user) {
-      return (
-        <div>
-          <RunfinityNavbar/>
-
-          {this._renderSideNav()}
-
-          <img className={"carousel-info"} src={user.photoURL} alt={user.displayName}/>
-          <h3>Welcome {user.displayName}</h3>
-
-          <div>
-            {this._renderSelectedNav()}
-          </div>
-
-          <div>
-            <style>
-              {
+                    <div>
+                        <style>
+                            {
 
                                 `.carousel-info {
                                      border: 3px solid orange;
@@ -107,88 +123,94 @@ export class MemberPortal extends Component {
                                     padding: 0px;
                                      width: 150px;
                                     }`
-              }
-            </style>
-          </div>
-        </div>
-      );
-    }
-    return false;
-  }
-
-  _renderSelectedNav() {
-    let content = false;
-
-    if (this.state.selectedNav === MEMBER_OVERVIEW) {
-
-    } else if (this.state.selectedNav === MEMBER_HISTORY) {
-      content = (
-        <History
-          fireUser={this.state.fireUser}
-          userData={this.state.userData}
-        />
-      );
+                            }
+                        </style>
+                    </div>
+                </div>
+            );
+        }
+        return false;
     }
 
-    return content;
-  }
+    _renderSelectedNav() {
+        let content = false;
 
-  _renderSideNav() {
-    return (
-      <SideNav
-        onSelect={this.onSelect}
-        onToggle={this.onToggle}>
-        <Toggle/>
+        if (this.state.selectedNav === MEMBER_OVERVIEW) {
+            content = (
+                <Overview
+                fireUser={this.state.fireUser}
+                userData={this.state.userData}
+                totals={this.totals}
+                />
+            );
+        } else if (this.state.selectedNav === MEMBER_HISTORY) {
+            content = (
+                <History
+                    fireUser={this.state.fireUser}
+                    userData={this.state.userData}
+                />
+            );
+        }
 
-        <Nav defaultSelected="overview">
-          <NavItem
-            eventKey="overview"
-            onClick={() => {
-              this.showOverview()
-            }}>
+        return content;
+    }
 
-            <NavIcon>
-              <img src={overviewIcon}/>
-            </NavIcon>
-            <NavText>
-              Overview
-            </NavText>
-          </NavItem>
+    _renderSideNav() {
+        return (
+            <SideNav
+                onSelect={this.onSelect}
+                onToggle={this.onToggle}>
+                <Toggle/>
 
-          <NavItem
-            eventKey="history"
-            onClick={() => {
-              this.showHistory()
-            }}>
-            <NavIcon>
-              <img src={historyIcon}/>
-            </NavIcon>
+                <Nav defaultSelected="overview">
+                    <NavItem
+                        eventKey="overview"
+                        onClick={() => {
+                            this.showOverview()
+                        }}>
 
-            <NavText>
-              History
-            </NavText>
+                        <NavIcon>
+                            <img src={overviewIcon}/>
+                        </NavIcon>
+                        <NavText>
+                            Overview
+                        </NavText>
+                    </NavItem>
 
-          </NavItem>
+                    <NavItem
+                        eventKey="history"
+                        onClick={() => {
+                            this.showHistory()
+                        }}>
+                        <NavIcon>
+                            <img src={historyIcon}/>
+                        </NavIcon>
 
-          <NavItem
-            eventKey="logout"
-            onClick={() => {
-              this.logOut()
-            }}>
-            <NavIcon>
-              <img src={logoutIcon}/>
-            </NavIcon>
+                        <NavText>
+                            History
+                        </NavText>
 
-            <NavText>
-              Logout
-            </NavText>
+                    </NavItem>
 
-          </NavItem>
+                    <NavItem
+                        eventKey="logout"
+                        onClick={() => {
+                            this.logOut()
+                        }}>
+                        <NavIcon>
+                            <img src={logoutIcon}/>
+                        </NavIcon>
 
-        </Nav>
-      </SideNav>
-    );
-  }
+                        <NavText>
+                            Logout
+                        </NavText>
+
+                    </NavItem>
+
+                </Nav>
+            </SideNav>
+        );
+    }
 
 
 }
