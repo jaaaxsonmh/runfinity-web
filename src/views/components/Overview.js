@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import firebase from "firebase";
-import {Alert,
+import {
+    Alert,
     Card,
     CardBody, Col, Container, Row, Spinner
 } from "reactstrap";
@@ -34,14 +35,28 @@ export class Overview extends Component {
                 .then((data) => {
                     return data.json();
                 }).then((data) => {
-                    console.log(data)
-                    data.forEach(function (userData) {
-                        console.log("Calories" + userData.calories)
-                        console.log("Distance" + userData.distance)
-                        console.log("Average Speed" + userData.averageSpeed)
-                        console.log("Steps" + userData.steps)
 
-                    });
+                let calories = this.state.caloriesTotal;
+                let distance = this.state.distanceTotal;
+                let averageSpeed = this.state.averageSpeedTotal;
+                let steps = this.state.stepsTotal;
+
+                data.forEach(function (userData) {
+                    console.log("cals:" +userData.calories)
+                    calories += userData.calories;
+                    console.log("dist:" +userData.distance)
+                    distance += userData.distance;
+                    console.log("speed:" +userData.averageSpeed)
+                    averageSpeed += userData.averageSpeed;
+                    console.log("Steps:" + userData.steps)
+                    steps += userData.steps;
+                });
+
+                this.state.caloriesTotal = calories;
+                this.state.distanceTotal = distance;
+                this.state.averageSpeedTotal = averageSpeed;
+                this.state.stepsTotal = steps;
+
                 this.setState({
                     userData: data
                 });
@@ -53,6 +68,10 @@ export class Overview extends Component {
         this.state = {
             userData: null,
             fireUser: null,
+            caloriesTotal: null,
+            distanceTotal: null,
+            averageSpeedTotal: null,
+            stepsTotal: null,
         }
     }
 
@@ -86,125 +105,54 @@ export class Overview extends Component {
             );
         } else {
             return <div>
-                {this._sortRunData()}
-                {this._renderRunData()}
+                {this._renderCardData()}
             </div>
         }
     }
 
-    _sortRunData() {
-        this.state.userData.sort(function(arg1, arg2){
-            return arg2.startTime - arg1.startTime;
-        });
-    }
-
-    _renderRunData() {
-        let data = this.state.userData;
-        // https://static.runfinity.co.nz/maps/api/staticmap?size=400x400&path=weight:3%7Ccolor:blue%7Cenc:ha}_F}eui`@JD
-
-
-
+    _renderCardData() {
         return (
             <div className="container">
+                <div
+                    className="container">
+                    <Card>
+                        <CardBody>
+                            <Container>
+                                <Row>
 
-                {
-                    data.map((runData) => {
-
-                        let startRunDate = moment(runData.startTime);
-                        let endRunDate = moment(runData.endTime);
-
-                        let runDate = startRunDate.format('ddd Do MMMM h:mm:ss a');
-
-                        let runDuration = moment.duration(endRunDate.diff(startRunDate));
-
-
-                        let steps = runData.steps;
-                        let cals = Math.round(runData.calories * 100) / 100;
-                        let distance = Math.round(runData.distance * 100) / 100;
-                        let pace = runData.averageSpeed;
-
-
-                        let encodedPath = this._encodeRunPath(runData);
-
-                        console.log("encodedPath:" , encodedPath)
-
-
-                        return (
-                            <div
-                                className="container"
-                                key={runData._id}>
-                                <Card>
-                                    <CardBody>
+                                    <Col>
                                         <img
-                                            className={"rounded-circle"}
-                                            src={`https://static.runfinity.co.nz/maps/api/staticmap?size=400x400&path=weight:3%7Ccolor:blue%7Cenc:${encodedPath}`}/>
-                                        <h5 align={"left"}>{runDate}</h5>
+                                            src={distanceIcon}/>
+                                        <p>{this.state.distanceTotal} m</p>
+                                        <p>Distance</p>
+                                    </Col>
 
-                                        <hr/>
+                                    <Col>
+                                        <img
+                                            src={caloriesIcon}/>
+                                        <p>{this.state.caloriesTotal}</p>
+                                        <p>Calories</p>
+                                    </Col>
 
-                                        <Container>
-                                            <Row>
+                                    <Col>
+                                        <img
+                                            src={stepsIcon}/>
+                                        <p>{this.state.stepsTotal}</p>
+                                        <p>Steps</p>
+                                    </Col>
 
-                                                <Col>
-                                                    <img
-                                                        src={distanceIcon}/>
-                                                    <p>{distance} m</p>
-                                                    <p>Distance</p>
-                                                </Col>
-
-                                                <Col>
-                                                    <img
-                                                        src={timeIcon}/>
-                                                    <p>{this._buildRunDuration(runDuration)}</p>
-                                                    <p>Duration</p>
-                                                </Col>
-
-                                                <Col>
-                                                    <img
-                                                        src={caloriesIcon}/>
-                                                    <p>{cals}</p>
-                                                    <p>Calories</p>
-                                                </Col>
-
-                                                <Col>
-                                                    <img
-                                                        src={stepsIcon}/>
-                                                    <p>{steps}</p>
-                                                    <p>Steps</p>
-                                                </Col>
-
-                                                <Col>
-                                                    <img
-                                                        src={paceIcon}/>
-                                                    <p>{pace}</p>
-                                                    <p>Pace</p>
-                                                </Col>
-
-                                            </Row>
-
-                                        </Container>
-
-                                    </CardBody>
-                                </Card>
-                            </div>
-                        );
-                    })
-                }
-
+                                    <Col>
+                                        <img
+                                            src={paceIcon}/>
+                                        <p>{this.state.averageSpeedTotal}</p>
+                                        <p>Pace</p>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </CardBody>
+                    </Card>
+                </div>
             </div>
         );
-    }
-
-    _buildRunDuration(duration) {
-        return duration.format("hh [hrs] mm [min] ss [secs]");
-    }
-
-    _encodeRunPath(runData) {
-        let latlngs = [];
-        runData.locationPoints.forEach((point) => {
-            latlngs.push([point.latLng.latitude, point.latLng.longitude])
-        });
-
-        return polyUtil.encode(latlngs);
     }
 }
