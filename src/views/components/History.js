@@ -81,7 +81,7 @@ export class History extends Component {
 
             let steps = runData.steps;
             let cals = roundNumber(runData.calories);
-            let distance =roundNumber(runData.distance);
+            let distance = roundNumber(runData.distance);
             let pace = runData.averageSpeed;
 
 
