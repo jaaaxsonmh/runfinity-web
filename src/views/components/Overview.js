@@ -14,6 +14,7 @@ import distanceIcon from "../images/road.svg";
 import timeIcon from "../images/time.svg";
 import stepsIcon from "../images/steps.svg";
 import paceIcon from "../images/pace.svg";
+import {roundNumber} from "../../utils/utils";
 
 
 //const API_SERVER = "http://localhost:3020";
@@ -75,28 +76,28 @@ export class Overview extends Component {
                                     <Col>
                                         <img
                                             src={distanceIcon}/>
-                                        <p>{this.props.totals.distance} m</p>
+                                        <p>{roundNumber(this.props.totals.steps)} m</p>
                                         <p>Distance</p>
                                     </Col>
 
                                     <Col>
                                         <img
                                             src={caloriesIcon}/>
-                                        <p>{this.props.totals.calories}</p>
+                                        <p>{roundNumber(this.props.totals.steps)}</p>
                                         <p>Calories</p>
                                     </Col>
 
                                     <Col>
                                         <img
                                             src={stepsIcon}/>
-                                        <p>{this.props.totals.steps}</p>
+                                        <p>{roundNumber(this.props.totals.steps)}</p>
                                         <p>Steps</p>
                                     </Col>
 
                                     <Col>
                                         <img
                                             src={paceIcon}/>
-                                        <p>{this.props.totals.averageSpeed}</p>
+                                        <p>{roundNumber(this.props.totals.averageSpeed)}</p>
                                         <p>Pace</p>
                                     </Col>
                                 </Row>

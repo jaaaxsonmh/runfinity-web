@@ -14,6 +14,7 @@ import distanceIcon from "../images/road.svg";
 import timeIcon from "../images/time.svg";
 import stepsIcon from "../images/steps.svg";
 import paceIcon from "../images/pace.svg";
+import {roundNumber} from "../../utils/utils";
 
 momentDurationFormatSetup(moment);
 
@@ -79,8 +80,8 @@ export class History extends Component {
 
 
             let steps = runData.steps;
-            let cals = Math.round(runData.calories * 100) / 100;
-            let distance = Math.round(runData.distance * 100) / 100;
+            let cals = roundNumber(runData.calories);
+            let distance =roundNumber(runData.distance);
             let pace = runData.averageSpeed;
 
 
