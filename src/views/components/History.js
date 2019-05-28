@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import firebase from "firebase";
 import {
-  Alert,
+  Alert, Button,
   Card,
-  CardBody, Col, Container, Row, Spinner
+  CardBody, Col, Container, Modal, ModalBody, ModalFooter, ModalHeader, Row, Spinner
 } from "reactstrap";
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
@@ -15,6 +15,7 @@ import timeIcon from "../images/time.svg";
 import stepsIcon from "../images/steps.svg";
 import paceIcon from "../images/pace.svg";
 import {roundNumber} from "../../utils/utils";
+import MapContainer from "./RunPreview";
 
 momentDurationFormatSetup(moment);
 
@@ -22,6 +23,18 @@ export class History extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      mapPreview: false
+    };
+
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      mapPreview: !prevState.mapPreview
+    }));
   }
 
   render() {
@@ -30,6 +43,7 @@ export class History extends Component {
       return (
         <div>
           {this._renderRuns()}
+          {this._renderMapPreview()}
         </div>
       );
     }
@@ -86,6 +100,8 @@ export class History extends Component {
 
 
             let encodedPath = this._encodeRunPath(runData);
+            let pathPoly = this._getPathData(runData);
+
 
             console.log("encodedPath:", encodedPath)
 
@@ -99,6 +115,18 @@ export class History extends Component {
                     <img
                       className={"rounded-circle"}
                       src={`https://static.runfinity.co.nz/maps/api/staticmap?size=400x400&path=weight:3%7Ccolor:blue%7Cenc:${encodedPath}`}/>
+                    <br/>
+                    <Button
+                      outline
+                      onClick={() => {
+
+                        this.setState({
+                          pathPoly: pathPoly
+                        });
+
+                        this.toggle()
+                      }}
+                      color="primary">Open map</Button>{' '}
                     <h5 align={"left"}>{runDate}</h5>
 
                     <hr/>
@@ -156,6 +184,23 @@ export class History extends Component {
     );
   }
 
+  _renderMapPreview() {
+    return (
+      <Modal
+        isOpen={this.state.mapPreview}
+        size={"lg"}
+        toggle={this.toggle}
+        className={this.props.className}
+      >
+        <ModalHeader toggle={this.toggle}>Your run preview</ModalHeader>
+
+        <MapContainer
+          pathPoly={this.state.pathPoly}/>
+
+      </Modal>
+    );
+  }
+
   _buildRunDuration(duration) {
     return duration.format("hh [hrs] mm [min] ss [secs]");
   }
@@ -167,5 +212,14 @@ export class History extends Component {
     });
 
     return polyUtil.encode(latlngs);
+  }
+
+  _getPathData(runData) {
+    let latlngs = [];
+    runData.locationPoints.forEach((point) => {
+      latlngs.push({lat: point.latLng.latitude, lng: point.latLng.longitude})
+    });
+
+    return latlngs;
   }
 }

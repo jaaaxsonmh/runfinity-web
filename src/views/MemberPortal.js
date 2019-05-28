@@ -10,6 +10,9 @@ import momentDurationFormatSetup from "moment-duration-format";
 import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import {Overview} from "./components/Overview";
+import MapContainer, {RunPreview} from "./components/RunPreview";
+import {GoogleApiWrapper} from "google-maps-react";
+
 
 
 const API_SERVER = "https://api.runfinity.co.nz";
@@ -214,3 +217,12 @@ export class MemberPortal extends Component {
 
 
 }
+
+const LoadingContainer = (props) => (
+  <div>Fancy loading container!</div>
+);
+
+export default GoogleApiWrapper({
+  apiKey: "AIzaSyAlr3gtql5kyrj_i88Yc0f7w5WOq9aNc0Y",
+  LoadingContainer: LoadingContainer
+})(MemberPortal)
