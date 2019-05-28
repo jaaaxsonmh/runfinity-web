@@ -15,6 +15,7 @@ import timeIcon from "../images/time.svg";
 import stepsIcon from "../images/steps.svg";
 import paceIcon from "../images/pace.svg";
 import {roundNumber} from "../../utils/utils";
+import {History} from "./History";
 
 
 //const API_SERVER = "http://localhost:3020";
@@ -58,6 +59,10 @@ export class Overview extends Component {
     } else {
       return (<div>
           {this._renderCardData()}
+          <History
+            fireUser={this.props.fireUser}
+            userData={this.props.userData}
+          />
         </div>
       );
     }
