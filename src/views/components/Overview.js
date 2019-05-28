@@ -69,6 +69,7 @@ export class Overview extends Component {
         <div
           className="container">
           <Card>
+            <h3>Total statistic</h3>
             <CardBody>
               <Container>
                 <Row>
@@ -76,14 +77,14 @@ export class Overview extends Component {
                   <Col>
                     <img
                       src={distanceIcon}/>
-                    <p>{roundNumber(this.props.totals.steps)} m</p>
+                    <p>{roundNumber(this.props.totals.distance)} m</p>
                     <p>Distance</p>
                   </Col>
 
                   <Col>
                     <img
                       src={caloriesIcon}/>
-                    <p>{roundNumber(this.props.totals.steps)}</p>
+                    <p>{roundNumber(this.props.totals.calories)}</p>
                     <p>Calories</p>
                   </Col>
 
