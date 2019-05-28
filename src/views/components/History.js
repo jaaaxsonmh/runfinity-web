@@ -120,9 +120,11 @@ export class History extends Component {
                       outline
                       onClick={() => {
 
-                        this.setState({
-                          pathPoly: pathPoly
-                        });
+                        // this.setState({
+                        //   pathPoly: pathPoly
+                        // });
+
+                        this.state.pathPoly = pathPoly;
 
                         this.toggle()
                       }}
@@ -165,7 +167,7 @@ export class History extends Component {
                         <Col>
                           <img
                             src={paceIcon}/>
-                          <p>{pace}</p>
+                          <p>{pace} km/h</p>
                           <p>Pace</p>
                         </Col>
 

@@ -98,7 +98,7 @@ export class Overview extends Component {
                   <Col>
                     <img
                       src={paceIcon}/>
-                    <p>{roundNumber(this.props.totals.averageSpeed)}</p>
+                    <p>{roundNumber(this.props.totals.averageSpeed)} km/h</p>
                     <p>Average Pace</p>
                   </Col>
                 </Row>
