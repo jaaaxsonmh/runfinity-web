@@ -85,7 +85,7 @@ export class Overview extends Component {
                     <img
                       src={caloriesIcon}/>
                     <p>{roundNumber(this.props.totals.calories)}</p>
-                    <p>Calories</p>
+                    <p>Total Calories burned</p>
                   </Col>
 
                   <Col>
@@ -99,7 +99,7 @@ export class Overview extends Component {
                     <img
                       src={paceIcon}/>
                     <p>{roundNumber(this.props.totals.averageSpeed)}</p>
-                    <p>Pace</p>
+                    <p>Average Pace</p>
                   </Col>
                 </Row>
               </Container>

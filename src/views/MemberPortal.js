@@ -7,12 +7,10 @@ import historyIcon from "./images/history.png";
 import overviewIcon from "./images/overview.png";
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
-import SideNav, {Toggle, Nav, NavItem, NavIcon, NavText} from '@trendmicro/react-sidenav';
+import SideNav, {Nav, NavIcon, NavItem, NavText, Toggle} from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import {Overview} from "./components/Overview";
-import MapContainer, {RunPreview} from "./components/RunPreview";
 import {GoogleApiWrapper} from "google-maps-react";
-
 
 
 const API_SERVER = "https://api.runfinity.co.nz";
@@ -46,6 +44,8 @@ export class MemberPortal extends Component {
           // Convert data to JSON
           return data.json();
         }).then((data) => {
+        return data.filter(word => word.distance >= 100);
+      }).then((data) => {
 
         data.forEach(userData => {
           console.log("cals:" + userData.calories);
@@ -57,6 +57,8 @@ export class MemberPortal extends Component {
           console.log("Steps:" + userData.steps);
           this.totals.steps += userData.steps;
         });
+
+        this.totals.averageSpeed /= data.length;
 
         let sorted = data.sort((runA, runB) => {
           return runB.startTime - runA.startTime;
