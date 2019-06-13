@@ -225,6 +225,6 @@ const LoadingContainer = (props) => (
 );
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyAlr3gtql5kyrj_i88Yc0f7w5WOq9aNc0Y",
+  apiKey: "------------------",
   LoadingContainer: LoadingContainer
 })(MemberPortal)
