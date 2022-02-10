@@ -9,7 +9,7 @@
     "google-maps-react": "^2.0.2",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.2.2",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "polyline-encoded": "0.0.8",
     "react": "^16.8.6",
     "react-dom": "^16.7.0",
